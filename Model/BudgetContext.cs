@@ -11,8 +11,8 @@ namespace tfmpj.Model
     public class BudgetContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; } 
-        public DbSet<Transaction> Transactions { get; set; } 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +21,14 @@ namespace tfmpj.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+        .Property(u => u.Budget)
+        .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Transaction>()
+    .Property(t => t.Amount)
+    .HasPrecision(18, 2); // Максимально 18 цифр в числе, 2 из которых после запятой
+
             modelBuilder.Entity<Transaction>()
            .HasOne(t => t.User)
            .WithMany()

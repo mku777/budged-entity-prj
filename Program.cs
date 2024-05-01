@@ -1,18 +1,19 @@
 ﻿using tfmpj.Model;
 using tfmpj.Model.Entities;
 using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 using (var db = new BudgetContext())
 {
 
 
     var result = db.Transactions.Join(
-       db.Users, // вторая таблица для объединения
-        t => t.UserId, // ключ из первой таблицы (Transactions)
-        u => u.Id, // ключ из второй таблицы (Users)
-        (t, u) => new // результат объединения
+       db.Users,
+        t => t.UserId,
+        u => u.Id,
+        (t, u) => new
         {
-            // Выберите поля, которые вы хотите включить в результат
+
             TransactionId = t.TransactionId,
             Amount = t.Amount,
             Date = t.Date,
@@ -32,7 +33,7 @@ using (var db = new BudgetContext())
     //db.Database.EnsureCreated();
     //var user = new User()
     //{
-    //    UserName = "Jasya",
+    //    UserName = "Max",
     //};
     //db.Users.Add(user);
     //db.SaveChanges();
@@ -57,17 +58,17 @@ using (var db = new BudgetContext())
     //    Amount = 1000,
     //    Date = DateTime.Now,
     //    Description = "Зарплата",
-    //    UserId = user.Id, 
+    //    UserId = user.Id,
     //    CategoryId = incomeCategory.CategoryId
     //};
     //db.Transactions.Add(incomeTransaction);
 
     //var expenseTransaction = new Transaction()
     //{
-    //    Amount = -100,
+    //    Amount = -500,
     //    Date = DateTime.Now,
     //    Description = "Іграшки",
-    //    UserId = user.Id, 
+    //    UserId = user.Id,
     //    CategoryId = expenseCategory.CategoryId
     //};
     //db.Transactions.Add(expenseTransaction);

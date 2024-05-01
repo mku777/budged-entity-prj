@@ -14,7 +14,8 @@ namespace tfmpj.Model.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string? UserName { get; set; } 
+        public string? UserName { get; set; }
+        public decimal Budget { get; set; }
     }
 
 }
